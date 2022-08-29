@@ -61,9 +61,10 @@ struct decon_rect {
 enum decon_idma_type {
     IDMA_G0 = 0,
     IDMA_G1,
-    IDMA_G2,
     IDMA_VG0,
-    ODMA_WB,
+    IDMA_VG1,
+    IDMA_VGF0,
+    IDMA_VGF1, /* VGRF in case of Exynos9810 */
     MAX_DECON_DMA_TYPE,
 };
 struct decon_user_window {
@@ -94,7 +95,6 @@ struct decon_win_config {
     DECON_WIN_STATE_BUFFER,
     DECON_WIN_STATE_UPDATE,
     DECON_WIN_STATE_CURSOR,
-    DECON_WIN_STATE_MRESOL = 0x10000,
   } state;
   union {
     __u32 color;
@@ -127,14 +127,7 @@ struct decon_disp_info {
   enum decon_psr_mode psr_mode;
   struct lcd_mres_info mres_info;
   u32 chip_ver;
-  uint8_t reverved[128];
-};
-struct decon_dual_display_blank_data {
-  enum {
-    DECON_PRIMARY_DISPLAY = 0,
-    DECON_SECONDARY_DISPLAY,
-  } display_type;
-  int blank;
+  unsigned char reverved[128];
 };
 
 #endif
